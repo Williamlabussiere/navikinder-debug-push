@@ -182,19 +182,19 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Create iOS-optimized payload
     const notificationPayload = {
-      title: `💊 ${requestData.medication_name}`,
-      body: `Time for ${requestData.child_name}'s medication (${requestData.dose_amount} ${requestData.dose_unit})`,
-      icon: '/navikinder-logo-256.png',
-      badge: '/navikinder-logo-256.png',
+      notification: {
+        title: `💊 ${requestData.medication_name}`,
+        body: `Time for ${requestData.child_name}'s medication (${requestData.dose_amount} ${requestData.dose_unit})`,
+        icon: '/navikinder-logo-256.png',
+        badge: '/navikinder-logo-256.png',
+        sound: 'default',
+      },
       data: {
         doseInstanceId: requestData.dose_instance_id,
         medicationName: requestData.medication_name,
         childName: requestData.child_name,
         timestamp: Date.now()
       },
-      // iOS specific
-      sound: 'default',
-      tag: `dose-${requestData.dose_instance_id}`
     };
 
     const payloadString = JSON.stringify(notificationPayload);
